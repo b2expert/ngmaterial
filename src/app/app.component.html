@@ -1,1 +1,86 @@
-material
+<div id="container">
+  <header>
+    <mat-toolbar>
+      <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+      </button> -->
+      <span>Beginner2Expert.com</span>
+      <span class="spacer"></span>
+      <div>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Search here...">
+          <span matSuffix class="material-icons">search</span>
+        </mat-form-field>
+      </div>
+      <span class="spacer"></span>
+      <button mat-mini-fab color="white" [matMenuTriggerFor]="menu">
+        <img class="avatar-as-icon" src="assets/avatar.png" alt="" srcset="">
+      </button>
+      <mat-menu #menu="matMenu">
+        <mat-card class="example-card" [ngClass]="'profile-menu-card'">
+          <div class="mat-card-custom-header">
+            <div class="avatar-as-dp-wrapper">
+              <img mat-card-image class="avatar-as-dp" src="assets/avatar.png">
+              <button mat-mini-fab color="white" class="plus-photo">
+                <mat-icon>photo_camera</mat-icon>
+              </button>
+            </div>
+            <mat-card-content>
+              <p>Biswajit Jana</p>
+              <p>(Sr. Developer)</p>
+            </mat-card-content>
+          </div>
+          <mat-card-actions>
+            <button mat-menu-item>
+              <mat-icon>account_circle</mat-icon>
+              <span>My Account</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>logout</mat-icon>
+              <span>Logout</span>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-menu>
+    </mat-toolbar>
+  </header>
+
+  <mat-sidenav-container class="sidenav-container">
+
+    <mat-sidenav #sidenav mode="side" opened class="mat-sidenav-left">
+      <div>
+        <a>
+          <span class="material-icons d-block">
+            dashboard
+          </span>
+          Dashboard
+        </a>
+      </div>
+      <div class="active">
+        <a>
+          <span class="material-icons d-block">
+            table_view
+          </span>
+          Table
+        </a>
+      </div>
+      <div>
+        <a>
+          <span class="material-icons d-block">
+            done
+          </span>
+          Table
+        </a>
+      </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="sidenav-content">
+      <main>
+        Child page content
+      </main>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+
+  <!-- <mat-toolbar class="footer-container">Footer</mat-toolbar> -->
+</div>

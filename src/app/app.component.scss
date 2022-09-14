@@ -1,0 +1,99 @@
+$bg-gmail : #eaf1fb;
+.profile-menu-card {
+  margin-top: -8px;
+  margin-bottom: -8px;
+
+  .mat-card-custom-header {
+    margin: auto;
+    width: 50%;
+
+    .avatar-as-dp-wrapper {
+      position: relative;
+
+      .plus-photo {
+        position: absolute;
+        bottom: 13px;
+        right: 0px;
+        color: blue;
+      }
+    }
+  }
+}
+
+#container {
+  .mat-toolbar {
+    background-color: $bg-gmail;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    .avatar-as-icon {
+      width: 100%;
+      margin-top: -8px;
+    }
+
+    .spacer {
+      flex: 1 1 auto;
+    }
+
+    .example-full-width {
+      width: 100%;
+    }
+  }
+
+  .sidenav-container {
+    position: absolute;
+    top: 60px;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+
+    .mat-sidenav-left {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+      background: #eaf1fb;
+
+      div {
+        padding: 10px;
+
+        a {
+          border: none;
+          outline: 0;
+        }
+      }
+
+      .active {
+        border-left: 5px solid blue;
+      }
+    }
+
+    .sidenav-content {
+      main {
+        margin: 5px;
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        min-height: 90%;
+        background-color: #fff;
+      }
+    }
+  }
+
+  .footer-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
