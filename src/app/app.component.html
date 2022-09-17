@@ -26,8 +26,8 @@
               </button>
             </div>
             <mat-card-content>
-              <p>Biswajit Jana</p>
-              <p>(Sr. Developer)</p>
+              <p>{{authContext.user.firstName}} {{authContext.user.lastName}}</p>
+              <p>({{authContext.user.roleName}})</p>
             </mat-card-content>
           </div>
           <mat-card-actions>
@@ -35,7 +35,7 @@
               <mat-icon>account_circle</mat-icon>
               <span>My Account</span>
             </button>
-            <button mat-menu-item>
+            <button mat-menu-item (click)="logout()">
               <mat-icon>logout</mat-icon>
               <span>Logout</span>
             </button>
@@ -48,26 +48,18 @@
   <mat-sidenav-container class="sidenav-container">
 
     <mat-sidenav #sidenav mode="side" opened class="mat-sidenav-left">
-      <div>
-        <a>
+      <div [ngClass]="{'active': activeNav === 'dashboard'}">
+        <a routerLink="">
           <span class="material-icons d-block">
             dashboard
           </span>
           Dashboard
         </a>
       </div>
-      <div class="active">
-        <a>
+      <div [ngClass]="{'active': activeNav === 'data_grid'}">
+        <a routerLink="data/grid">
           <span class="material-icons d-block">
             table_view
-          </span>
-          Table
-        </a>
-      </div>
-      <div>
-        <a>
-          <span class="material-icons d-block">
-            done
           </span>
           Table
         </a>
@@ -76,7 +68,7 @@
 
     <mat-sidenav-content class="sidenav-content">
       <main>
-        Child page content
+        <router-outlet></router-outlet>
       </main>
     </mat-sidenav-content>
 

@@ -1,0 +1,38 @@
+#login-wraper {
+    header {
+        display: flex;
+
+        h2,
+        i {
+            flex-grow: 1;
+        }
+
+        i {
+            text-align: right;
+        }
+    }
+
+    main {
+        width: 400px;
+        form {
+            mat-form-field {
+                width: 100%;
+            }
+
+            .btn-group {
+                display: flex;
+                flex-grow: 1;
+
+                button {
+                    display: block;
+                    margin-left: auto;
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+
+    .d-inline-block {
+        display: inline;
+    }
+}

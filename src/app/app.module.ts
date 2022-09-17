@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgMatModule } from './ng-mat.module';
+import { SharedModule } from './shared.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,7 @@ import { NgMatModule } from './ng-mat.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NgMatModule
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

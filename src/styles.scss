@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 $bg-gmail : #eaf1fb;
-html, body {
+$primary-color : #3f51b5;
+$danger-color : #f44336;
+$success-color : #35a52d;
+
+html,
+body {
     height: 100%;
 }
 
@@ -9,6 +14,19 @@ body {
     padding: 0;
     background-color: $bg-gmail;
 }
+
 .d-block {
     display: block;
+}
+
+.text-primary {
+    color: $primary-color;
+}
+
+.text-danger {
+    color: $danger-color;
+}
+
+.text-success {
+    color: $success-color;
 }

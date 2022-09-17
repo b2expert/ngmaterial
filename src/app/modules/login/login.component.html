@@ -1,0 +1,26 @@
+<div id="login-wraper">
+    <header>
+        <h2>User Login</h2>
+        <!-- <i class="material-icons">close</i> -->
+    </header>
+    <main>
+        <form (submit)="login()" #loginForm="ngForm">
+            <label for="info" [ngClass]="{'text-danger': loginState.id < 0, 'text-success': loginState.id > 0}">{{loginState.message}}</label>
+            <mat-form-field>
+                <input matInput type="text" name="username" [(ngModel)]="loginInput.userName"
+                    placeholder="Enter user name..." required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="password" name="password" [(ngModel)]="loginInput.password"
+                    placeholder="Enter password..." required>
+            </mat-form-field>
+
+            <div class="btn-group">
+                <button type="submit" mat-raised-button color="primary"
+                    [disabled]="loginState.progress || loginForm.invalid">
+                    {{loginState.progress ? 'Please wait...': 'Login'}}
+                </button>
+            </div>
+        </form>
+    </main>
+</div>
