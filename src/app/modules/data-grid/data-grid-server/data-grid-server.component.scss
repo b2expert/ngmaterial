@@ -1,0 +1,24 @@
+#data-table-wrapper {
+    position: relative;
+
+    .disable-table {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background-color: #ccc;
+        opacity: 0.5;
+        mat-spinner {
+            margin: auto;
+            margin-top: 10%;
+        }
+    }
+
+    table {
+        width: 100%;
+
+        img {
+            width: 100%;
+            margin-top: -8px;
+        }
+    }
+}

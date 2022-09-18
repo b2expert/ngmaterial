@@ -1,1 +1,24 @@
-<p>data-grid works!</p>
+<div id="gridExampleWrapper">
+    <header>
+        <h2>Angular Grid Example</h2>
+    </header>
+    <mat-divider></mat-divider>
+    <main>
+        <mat-form-field>
+            <mat-select name="impType" [(ngModel)]="implType">
+                <mat-option value="">Select implementation type</mat-option>
+                <mat-option value="client">Client</mat-option>
+                <mat-option value="server">Server</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <ng-container [ngSwitch]="implType">
+            <ng-container *ngSwitchCase="'client'">
+                <app-data-grid-client></app-data-grid-client>
+            </ng-container>
+            <ng-container *ngSwitchCase="'server'">
+                <app-data-grid-server></app-data-grid-server>
+            </ng-container>
+        </ng-container>
+    </main>
+</div>

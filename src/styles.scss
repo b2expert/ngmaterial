@@ -15,8 +15,15 @@ body {
     background-color: $bg-gmail;
 }
 
+mat-form-field {
+    width: 100%;
+}
+
 .d-block {
     display: block;
+}
+.d-inline-block {
+    display: inline;
 }
 
 .text-primary {

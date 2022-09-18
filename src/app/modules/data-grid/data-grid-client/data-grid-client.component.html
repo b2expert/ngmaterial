@@ -1,1 +1,44 @@
-<p>data-grid-client works!</p>
+<div id="data-table-wrapper">
+
+    <div class="disable-table" *ngIf="!dataSource.data.length">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="SL">
+            <th mat-header-cell *matHeaderCellDef>SL#</th>
+            <td mat-cell *matCellDef="let customer; let i = index">{{ i + 1 }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="custName">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Customer</th>
+            <td mat-cell *matCellDef="let customer">
+                <button mat-mini-fab disabled>
+                    <img [src]="customer.profilePic | filePath" alt="" />
+                </button>
+                {{ customer.custName }} ({{ customer.custCode }})
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="mobileNo">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Mobile No</th>
+            <td mat-cell *matCellDef="let customer">{{ customer.mobileNo }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="dob">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>DOB</th>
+            <td mat-cell *matCellDef="let customer">{{ customer.dob }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="totalOrder">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Total Order</th>
+            <td mat-cell *matCellDef="let customer">{{ customer.totalOrder }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
