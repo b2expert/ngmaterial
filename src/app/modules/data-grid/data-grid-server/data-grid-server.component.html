@@ -4,16 +4,17 @@
         <mat-spinner></mat-spinner>
     </div>
 
-    <!-- <form #> -->
     <mat-form-field>
-        <input matInput type="text" name="searchString" [(ngModel)]="inputFilter.searchString" (input)="onInputSearch()"
-            (keydown)="onKeydownSearch()" placeholder="Search by name, mobile, dob..." />
-        <button *ngIf="inputFilter.searchString" matSuffix mat-icon-button 
-        (click)="inputFilter.searchString = ''; onReset();">
+        <input matInput type="text" name="searchString" 
+        [(ngModel)]="inputFilter.searchString"
+        (input)="onSearchString()" 
+        (keydown)="onKeyDown()"
+        placeholder="Search by name, mobile etc...">
+        <button *ngIf="inputFilter.searchString" matSuffix mat-icon-button
+        (click)="inputFilter.searchString = ''; onResetSearch()">
             <mat-icon>close</mat-icon>
         </button>
     </mat-form-field>
-    <!-- </form> -->
 
     <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
