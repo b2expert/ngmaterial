@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { catchError, map } from "rxjs";
+import { map } from "rxjs";
 import { EndPoint } from "src/app/models";
 import { AppHttpService, UtilityService } from "src/app/services";
-import { ICustomer, ICustomerFilter, IGrid } from "./data-grid.model";
+import { ICustomerFilter, IGrid } from "./data-grid.model";
 
 @Injectable()
 export class DataGridService extends EndPoint {

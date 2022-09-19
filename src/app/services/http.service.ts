@@ -4,10 +4,9 @@ import { Router } from "@angular/router";
 import { catchError, map } from "rxjs";
 import { IApiResponse } from "../models";
 import { APP_CONSTS } from "../models/app.const";
-import { EndPoint } from "../models/endpoint.model";
 
 @Injectable({ providedIn: 'root' })
-export class AppHttpService extends EndPoint {
+export class AppHttpService {
 
     private _headers = {
         headers: {
@@ -16,7 +15,6 @@ export class AppHttpService extends EndPoint {
     };
 
     constructor(private _httpClient: HttpClient, private _router: Router) {
-        super();
     }
 
     private _handleError(error: HttpErrorResponse) {
