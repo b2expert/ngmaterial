@@ -78,7 +78,7 @@ export class DataGridDynamicComponent implements OnInit {
   private _filterGridData(input: ICustomerFilter) {
     this.loadingRecords = true;
     this._subscriptions.push(
-      this._gridContext.loadCustomers(input)
+      this._gridContext.customer.loadCustomers(input)
         .pipe(catchError(error => {
           this.dataSource = [];
           this.totalRecords = 0;

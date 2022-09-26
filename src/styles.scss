@@ -15,6 +15,18 @@ body {
     background-color: $bg-gmail;
 }
 
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .col {
+        flex-grow: 1;
+        margin: 1em;
+    }
+}
+
 mat-form-field {
     width: 100%;
 }

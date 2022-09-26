@@ -52,7 +52,7 @@ export class DataGridClientComponent implements OnInit {
   private _filterGridData(input: ICustomerFilter) {
 
     this._subscriptions.push(
-      this._gridContext.loadCustomers(input)
+      this._gridContext.customer.loadCustomers(input)
         .pipe(map(catchError => {
           this.dataSource = new MatTableDataSource();
           this.totalRecords = 0;

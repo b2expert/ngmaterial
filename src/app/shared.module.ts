@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgMatModule } from './ng-mat.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FilePathHandlerPipe } from './pipes';
@@ -10,6 +10,7 @@ import { FilePathHandlerPipe } from './pipes';
   exports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     NgMatModule,
     HttpClientModule,
     FilePathHandlerPipe

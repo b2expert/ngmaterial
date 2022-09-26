@@ -16,6 +16,12 @@ const routes: Routes = [
     loadChildren: () => import('./modules/data-grid/data-grid.module').then(m => m.DataGridModule)
   },
   {
+    path: 'select',
+    canActivate: [AuthGuard],
+    data: { activeNav: 'select' },
+    loadChildren: () => import('./modules/select/select.module').then(m => m.SelectModule)
+  },
+  {
     path: 'session/expired',
     loadChildren: () => import('./modules/session-expired/session-expired.module').then(m => m.SessionExpiredModule)
   }
