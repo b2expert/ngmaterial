@@ -22,10 +22,10 @@
             </ng-container>
             <ng-container *ngIf="colIndex > 0">
                 <td mat-cell *matCellDef="let customer;">
-                    {{customer[col.prop]}}
                     <button *ngIf="col.metaData?.imgSrc" mat-mini-fab disabled>
-                        <img [src]="customer[col.metaData?.imgSrc] | filePath" alt="" />
+                        <img [src]="customer.imgSrc | filePath" alt="" />
                     </button>
+                    {{customer[col.prop]}}
                 </td>
             </ng-container>
         </ng-container>
