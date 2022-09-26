@@ -5,12 +5,14 @@ import { SharedModule } from 'src/app/shared.module';
 import { DataGridService } from './data-grid.service';
 import { DataGridClientComponent } from './data-grid-client/data-grid-client.component';
 import { DataGridServerComponent } from './data-grid-server/data-grid-server.component';
+import { DataGridDynamicComponent } from './data-grid-dynamic/data-grid-dynamic.component';
 
 @NgModule({
   declarations: [
     DataGridComponent,
     DataGridClientComponent,
-    DataGridServerComponent
+    DataGridServerComponent,
+    DataGridDynamicComponent
   ],
   imports: [
     SharedModule,
