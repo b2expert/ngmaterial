@@ -37,6 +37,10 @@ export interface ICustomer {
     "createdBy": string
 }
 
+export class Customer {
+    
+}
+
 export interface ICustomerFilter {
     searchString?: string;
     dynamicCols?: number;
