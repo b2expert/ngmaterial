@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { Observable, map, debounceTime, startWith, find } from 'rxjs';
+import { map, Observable, startWith } from 'rxjs';
 import { CustomerService } from 'src/app/services';
-import { CustomerFilter, ICustomer, ICustomerFilter } from '../../data-grid/data-grid.model';
+import { CustomerFilter, ICustomer } from '../../data-grid/data-grid.model';
 
 @Component({
   selector: 'app-chip',
@@ -12,25 +12,38 @@ import { CustomerFilter, ICustomer, ICustomerFilter } from '../../data-grid/data
 })
 export class ChipComponent implements OnInit {
 
-  customers$: Observable<ICustomer[]> = new Observable();
-  selectedCustomers: ICustomer[] = [];
-  multiSelectCtrl = new FormControl('');
-
-  constructor(private _customerContext: CustomerService) { }
-
-  ngOnInit(): void {
-    this.multiSelectCtrl.valueChanges
-      .pipe(map(value => typeof value === 'object' ? '' : value || ''), startWith(''), debounceTime(500))
-      .subscribe(value => {
-        this.customers$ = this._customerContext.loadCustomers(new CustomerFilter({ searchString: value, perPage: 20 })).pipe(map(grid => grid.rows));
-      });
+  constructor(private _customerContext: CustomerService) {
   }
 
-  onOptionSelection(event: MatAutocompleteSelectedEvent) {
-    const include = this.selectedCustomers.find(customer => customer === event.option.value);
-    if (!include) {
-      this.selectedCustomers.push(event.option.value);
-    }
+  customers$: Observable<ICustomer[]> = new Observable();
+  selectedCustomers: ICustomer[] = [];
+  searchCtrl: FormControl = new FormControl();
+
+  ngOnInit(): void {
+    this.searchCtrl.valueChanges
+      .pipe(map(value => typeof value === 'object' ? '' : ''), startWith(''))
+      .subscribe(value => {
+        this.customers$ = this._customerContext
+          .loadCustomers(new CustomerFilter({ searchString: value, perPage: 20 }))
+          .pipe(map(c => c.rows))
+      })
+  }
+
+  onOptionSelect(e: MatAutocompleteSelectedEvent) {
+    const customer = e.option.value as ICustomer;
+    if (this.selectedCustomers.findIndex(c => c.rowId === customer.rowId) < 0)
+      this.selectedCustomers.push(customer);
+    else 
+      this.removeCustomer(customer);
+  }
+
+  removeCustomer(customer: ICustomer) {
+    this.selectedCustomers = [...this.selectedCustomers.filter(c => c.rowId !== customer.rowId)];
+  }
+
+  checkSelectedCustomer(customer: ICustomer) {
+    return this.selectedCustomers.findIndex(c => c.rowId === customer.rowId) > -1;
   }
 
 }
+

@@ -1,22 +1,22 @@
 <div class="row">
     <div class="col">
         <mat-form-field>
-            <mat-label>Search customer with chip and multiselect optionl</mat-label>
-            <mat-chip-list #chipList>
+            <mat-label>Search customer with form control</mat-label>
+            <mat-chip-list>
 
                 <mat-chip *ngFor="let customer of selectedCustomers">
                     {{customer.custName}}
-                    <mat-icon matChipRemove>cancel</mat-icon>
+                    <i class="material-icons" (click)="removeCustomer(customer)">close</i>
                 </mat-chip>
 
-                <input type="text" matInput [formControl]="multiSelectCtrl" [matChipInputFor]="chipList"
-                    [matAutocomplete]="customerSugessionPanelRef" placeholder="New Customer..." />
-
+                <input type="text" matInput [formControl]="searchCtrl" [matAutocomplete]="customerSugessionPanelRef"
+                    placeholder="Search more customer here..." />
             </mat-chip-list>
 
-            <mat-autocomplete #customerSugessionPanelRef="matAutocomplete" (optionSelected)="onOptionSelection($event)">
+            <mat-autocomplete #customerSugessionPanelRef="matAutocomplete" (optionSelected)="onOptionSelect($event)">
                 <mat-option [value]="customer" *ngFor="let customer of customers$ | async">
-                    {{customer.custName}}</mat-option>
+                    <mat-checkbox [checked]="checkSelectedCustomer(customer)">{{customer.custName}}</mat-checkbox>
+                </mat-option>
             </mat-autocomplete>
         </mat-form-field>
     </div>
