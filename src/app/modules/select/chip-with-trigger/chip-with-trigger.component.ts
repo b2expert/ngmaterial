@@ -1,16 +1,16 @@
-import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatAutocomplete, MatAutocompleteSelectedEvent, MatAutocompleteTrigger } from '@angular/material/autocomplete';
-import { debounceTime, map, Observable, of, startWith } from 'rxjs';
+import { MatAutocompleteTrigger, MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { Observable, map, startWith, debounceTime, of } from 'rxjs';
 import { CustomerService } from 'src/app/services';
-import { CustomerFilter, ICustomer } from '../../data-grid/data-grid.model';
+import { ICustomer, CustomerFilter } from '../../data-grid/data-grid.model';
 
 @Component({
-  selector: 'app-chip',
-  templateUrl: './chip.component.html',
-  styleUrls: ['./chip.component.scss']
+  selector: 'app-chip-with-trigger',
+  templateUrl: './chip-with-trigger.component.html',
+  styleUrls: ['./chip-with-trigger.component.scss']
 })
-export class ChipComponent implements OnInit {
+export class ChipWithTriggerComponent implements OnInit {
 
   constructor(private _customerContext: CustomerService) {
   }
@@ -80,4 +80,3 @@ export class ChipComponent implements OnInit {
   }
 
 }
-

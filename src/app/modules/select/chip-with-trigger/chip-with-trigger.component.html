@@ -4,9 +4,9 @@
             <mat-label>Search customer with form control</mat-label>
             <mat-chip-list #selectedCustomerList>
 
-                <mat-chip *ngFor="let customer of selectedCustomers">
-                    {{customer.custName}}
-                    <i class="material-icons" (click)="removeCustomer(customer)">close</i>
+                <mat-chip *ngIf="selectedCustomers.length">{{selectedCustomers[0].custName}}</mat-chip>
+                <mat-chip *ngIf="selectedCustomers.length > 1">
+                    <span class="other-selections">(+{{selectedCustomers.length - 1}} more)</span>
                 </mat-chip>
 
                 <input type="text" #searchCtrlInput matInput [formControl]="searchCtrl"
