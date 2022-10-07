@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { map, of } from "rxjs";
-import { EndPoint } from "../models";
+import { delay, map, of } from "rxjs";
+import { EndPoint, ICustomerData } from "../models";
 import { IGrid, ICustomerFilter, Grid } from "../modules/data-grid/data-grid.model";
 import { AppHttpService } from "./http.service";
 import { UtilityService } from "./utility.service";
@@ -29,5 +29,13 @@ export class CustomerService extends EndPoint {
                 this._customerGridData = apiResponse.data as IGrid;
                 return this._customerGridData;
             }));
+    }
+
+    saveCustomer(input: ICustomerData) {
+        return of({id: 1, message: 'Form data got saved!'})
+        .pipe(delay(1000))
+        .pipe(map(respose => {
+            throw new Error("Some custom error!");
+        }))
     }
 }

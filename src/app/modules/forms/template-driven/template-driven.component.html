@@ -1,1 +1,115 @@
-<p>template-driven works!</p>
+<mat-progress-bar mode="indeterminate" *ngIf="savingFormData"></mat-progress-bar>
+<div class="form-container">
+    <form #templateDrivenForm="ngForm" (submit)="saveForm()">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Name Details</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row">
+                    <mat-form-field>
+                        <input matInput name="firstName" #firstNameRef="ngModel"
+                            [(ngModel)]="inputModel.names.firstName" minlength="3" maxlength="30"
+                            placeholder="Enter first name..." required>
+                        <mat-icon matSuffix color="primary" *ngIf="firstNameRef.touched && firstNameRef.invalid"
+                            matTooltip="First name should have minimum of 3 and maximum of 30 characters.">info
+                        </mat-icon>
+                        <mat-icon matSuffix *ngIf="firstNameRef.valid">done</mat-icon>
+                        <mat-hint class="text-danger" *ngIf="firstNameRef.touched && firstNameRef.invalid">
+                            <span *ngIf="firstNameRef.errors?.['required']">First Name can not be left blank!</span>
+                            <span *ngIf="firstNameRef.errors?.['minlength']">First Name must have minimum of 3
+                                characters!</span>
+                        </mat-hint>
+
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput name="middleName" #middleNameRef="ngModel"
+                            [(ngModel)]="inputModel.names.middleName" minlength="3" maxlength="20"
+                            placeholder="Enter middle name...">
+                        <mat-icon matSuffix color="primary" *ngIf="middleNameRef.touched && middleNameRef.invalid"
+                            matTooltip="Middle name must have minimum of 3 and maximum of 20 characters long">info
+                        </mat-icon>
+                        <mat-icon matSuffix *ngIf="middleNameRef.dirty && middleNameRef.valid">done</mat-icon>
+                        <mat-hint class="text-danger" *ngIf="middleNameRef.touched && middleNameRef.invalid">
+                            <span *ngIf="middleNameRef.errors?.['minlength']">Middle Name must have minimum of 3
+                                characters!</span>
+                        </mat-hint>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput name="lastName" #lastNameRef="ngModel" [(ngModel)]="inputModel.names.lastName"
+                            minlength="3" maxlength="20" placeholder="Enter last name..." required>
+
+                        <mat-icon matSuffix color="primary" *ngIf="lastNameRef.touched && lastNameRef.invalid"
+                            matTooltip="Last name must have minimum of 3 and maximum of 20 characters long">info
+                        </mat-icon>
+                        <mat-icon matSuffix *ngIf="lastNameRef.valid">done</mat-icon>
+                        <mat-hint class="text-danger" *ngIf="lastNameRef.touched && lastNameRef.invalid">
+                            <span *ngIf="lastNameRef.errors?.['required']">Last Name can not be left blank!</span>
+                            <span *ngIf="lastNameRef.errors?.['minlength']">Last Name must have minimum of 3
+                                characters!</span>
+                        </mat-hint>
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <mat-divider></mat-divider>
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Contact Details</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row">
+                    <mat-form-field>
+                        <input matInput name="mobileNo" pattern="^[6-9]{1}[0-9]{9}$" #mobileNoRef="ngModel"
+                            [(ngModel)]="inputModel.contacts.mobileNo" placeholder="Enter 10 digit mobile no..."
+                            required>
+                        <mat-icon matSuffix color="primary" *ngIf="mobileNoRef.touched && mobileNoRef.invalid"
+                            matTooltip="Mobile number must be 10 digit positive integer number and valid Indian mobile pattern.">
+                            info</mat-icon>
+
+                        <mat-icon matSuffix *ngIf="mobileNoRef.valid">done</mat-icon>
+                        <mat-hint class="text-danger" *ngIf="mobileNoRef.touched && mobileNoRef.invalid">
+                            <span *ngIf="mobileNoRef.errors?.['required']">Mobile number can not be left blank!</span>
+                            <span *ngIf="mobileNoRef.errors?.['pattern']">Invalid mobile number!</span>
+                        </mat-hint>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput name="phoneNo" pattern="^[0-9]\d{2,4}-\d{8,8}$" #phoneNoRef="ngModel"
+                            [(ngModel)]="inputModel.contacts.phoneNo" placeholder="Enter land line no...">
+
+                        <mat-icon matSuffix color="primary" *ngIf="phoneNoRef.touched && phoneNoRef.invalid"
+                            matTooltip="Phone number format must be like {STD code}-{8 digit positive number} (e.g : 033-23459876/ 080-34567654/ 022-85233654 etc.">
+                            info</mat-icon>
+                        <mat-icon matSuffix *ngIf="phoneNoRef.dirty && phoneNoRef.valid">done</mat-icon>
+                        <mat-hint class="text-danger" *ngIf="phoneNoRef.touched && phoneNoRef.invalid">
+                            <span *ngIf="phoneNoRef.errors?.['pattern']">Invalid phone number!</span>
+                        </mat-hint>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" name="emailAddress" #emailRef="ngModel"
+                            [(ngModel)]="inputModel.contacts.email" placeholder="Enter valid email address..." required>
+
+                        <mat-icon matSuffix color="primary" *ngIf="emailRef.touched && emailRef.invalid"
+                            matTooltip="A valid email should have 3 elements: local-part, @, domain name. Such as simple@example.com, very.common@example.com, other.email-with-hyphen@example.com etc. ">
+                            info
+                        </mat-icon>
+                        <mat-icon matSuffix *ngIf="emailRef.valid">done</mat-icon>
+                        <mat-hint class="text-danger" *ngIf="emailRef.touched && emailRef.invalid">
+                            <span *ngIf="emailRef.errors?.['required']">Email can not be left blank!</span>
+                            <span *ngIf="emailRef.errors?.['pattern']">Invalid email address!</span>
+                        </mat-hint>
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-divider></mat-divider>
+
+        <div class="btn-group">
+            <button mat-stroked-button color="primary" type="reset">Reset</button>
+            <button mat-raised-button color="accent" [disabled]="templateDrivenForm.invalid || savingFormData">
+                {{savingFormData ? 'Please wait...': 'Save'}}
+            </button>
+        </div>
+    </form>
+</div>

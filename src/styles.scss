@@ -39,13 +39,13 @@ mat-form-field {
 }
 
 .text-primary {
-    color: $primary-color;
+    color: $primary-color !important;
 }
 
 .text-danger {
-    color: $danger-color;
+    color: $danger-color !important;
 }
 
 .text-success {
-    color: $success-color;
+    color: $success-color !important;
 }
