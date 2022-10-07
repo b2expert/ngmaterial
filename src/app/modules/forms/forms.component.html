@@ -17,6 +17,9 @@
 
 <div class="row">
     <div class="col">
-        
+        <ng-container [ngSwitch]="selectedFormId">
+            <ng-container *ngSwitchCase="1"><app-template-driven></app-template-driven></ng-container>
+            <ng-container *ngSwitchCase="2"><app-reactive-simple></app-reactive-simple></ng-container>
+        </ng-container>
     </div>
 </div>
