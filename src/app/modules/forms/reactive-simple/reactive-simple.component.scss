@@ -1,0 +1,24 @@
+.form-container {
+    .row {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        mat-form-field {
+            width: auto;
+            flex-grow: 1;
+            margin: 1em;
+        }
+    }
+
+    .btn-group {
+        margin: 2em;
+        display: table;
+        float: right;
+
+        button {
+            display: table-cell;
+            margin-left: 1em;
+        }
+    }
+}

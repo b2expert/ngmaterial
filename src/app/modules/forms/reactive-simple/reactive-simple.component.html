@@ -1,1 +1,61 @@
-<p>reactive-simple works!</p>
+<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+<div class="form-container">
+    <form [formGroup]="customerForm" >
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Name Details</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row" formGroupName="names">
+                    <mat-form-field>
+                        <input matInput name="firstName" formControlName="firstName" placeholder="Enter first name..." />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput name="middleName" formControlName="middleName" placeholder="Enter middle name..." />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput name="lastName" formControlName="lastName" placeholder="Enter last name..." />
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <mat-divider></mat-divider>
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Contact Details</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row" formGroupName="contacts">
+                    <mat-form-field>
+                        <input matInput name="mobileNo" formControlName="mobileNo" placeholder="Enter mobile number..." />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput name="phoneNo" formControlName="phoneNo" placeholder="Enter phone number..." />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput name="email" formControlName="email" placeholder="Enter email address..." />
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <mat-divider></mat-divider>
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Other Details</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row" formGroupName="others">
+                    <mat-form-field>
+                        <input matInput type="date" name="dob" formControlName="dob" placeholder="Enter dob..." />
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <mat-divider></mat-divider>
+
+        <div class="btn-group">
+            <button mat-stroked-button color="primary" type="button">Reset</button>
+            <button mat-raised-button color="accent" [disabled]="customerForm.invalid">Save</button>
+        </div>
+    </form>
+</div>

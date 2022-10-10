@@ -8,16 +8,17 @@
 
 <div class="row">
     <div class="col">
-        <mat-radio-group aria-label="Select a form" name="formGroup" [(ngModel)]="selectedFormId">
-            <mat-radio-button [value]="1">Template Driven Simple Form</mat-radio-button>
-            <mat-radio-button [value]="2">Reactive Simple Form</mat-radio-button>
+        <mat-radio-group aria-label="Select a form" name="formGroup" (change)="onOptionChange($event)" [(ngModel)]="formTypeId">
+            <mat-radio-button value="1">Template Driven Static Form</mat-radio-button>
+            <mat-radio-button value="2">Reactive Static Form</mat-radio-button>
+            <mat-radio-button value="3">Reactive Dynamic Form</mat-radio-button>
           </mat-radio-group>
     </div>
 </div>
 
 <div class="row">
     <div class="col">
-        <ng-container [ngSwitch]="selectedFormId">
+        <ng-container [ngSwitch]="formTypeId">
             <ng-container *ngSwitchCase="1"><app-template-driven></app-template-driven></ng-container>
             <ng-container *ngSwitchCase="2"><app-reactive-simple></app-reactive-simple></ng-container>
         </ng-container>
