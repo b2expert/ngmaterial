@@ -8,7 +8,7 @@ const VALIDATION_KEYS: any = {
     'max': (params: any) => `Maximum number should be ${params.max}/${params.actual}`,
     'min': (params: any) => `Minimum number should be ${params.min}/${params.actual}`,
     'whitespace': (params: any) => `White spaces are not allowed`,
-    'invalidDOB': (params: any) => `Invalid DOB, Age as on current date: ${params.ageAsOnDate}yrs, required age must be >= 18`
+    'invalidDOB': (params: any) => `Invalid DOB, Age as on current date: ${params.ageAsOnDate} yrs, required age must be >= 18 yrs`
 };
 
 export class MessageValidator {

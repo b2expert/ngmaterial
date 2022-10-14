@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { MessageValidator } from "../models";
+import { dobValidator, MessageValidator } from "../models";
 
 const REGEX_PATTERNS = {
     email: '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$',
@@ -8,9 +8,23 @@ const REGEX_PATTERNS = {
     INLandNum: '^[0][1-9]{2}(-)[0-9]{8}$'
 }
 
+const STATIC_INFOS = {
+    firstName: 'Enter a valid first name(e.g Samplefirstname)',
+    middleName: 'Enter a valid middle name(e.g Kumar)',
+    lastName: 'Enter a valid last name(e.g Rana/ Mandal etc)',
+    mobileNo: 'Enter a valid indian mobile number, starts with 6/7/8/9',
+    phoneNo: 'Enter a valid land number(format: {STD code-8 digit positive number})',
+    email: 'Enter a valid email(format: {example.subname@domain.com/in/org etc})',
+    dob: 'Enter a valid dob(e.g DOB must be greater than or euqal to 18yrs as of current date)'
+}
+
 @Injectable({providedIn: 'root'})
 export class CustomerFormService extends MessageValidator {
 
+    get staticInfos() {
+        return STATIC_INFOS;
+    }
+    
     constructor(private _fb: FormBuilder) {
         super();
     }
@@ -28,7 +42,7 @@ export class CustomerFormService extends MessageValidator {
                 email: this._fb.control('', [Validators.required, Validators.pattern(REGEX_PATTERNS.email)]),
             }),
             others: this._fb.group({
-                dob: this._fb.control('', [Validators.required]),
+                dob: this._fb.control('', [Validators.required, dobValidator]),
             })
         })
     }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs';
-import { CustomerFormService } from 'src/app/services';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { catchError, debounceTime, distinctUntilChanged, map } from 'rxjs';
+import { CustomerFormService, CustomerService } from 'src/app/services';
 
 @Component({
   selector: 'app-reactive-simple',
@@ -12,18 +13,42 @@ export class ReactiveSimpleComponent implements OnInit {
 
   customerForm: FormGroup;
   displayMessage: { [key: string]: string } = {};
+  savingFormData: boolean = false;
 
-  constructor(public formContext: CustomerFormService) {
+  constructor(
+    public formContext: CustomerFormService,
+    private _customerContext: CustomerService,
+    private _matSnackbarContext: MatSnackBar
+  ) {
     this.customerForm = this.formContext.initStaticCustomerForm();
   }
 
 
   ngOnInit(): void {
     this.customerForm.valueChanges
-      .pipe(map(debounceTime(100), distinctUntilChanged()))
+      .pipe(debounceTime(100))
       .subscribe(model => {
         this.displayMessage = this.formContext.processMessages(this.customerForm);
       });
+  }
+
+  validate(groupName: string, controlName: string) {
+    const control = this.customerForm.get(groupName)?.get(controlName);
+    return control?.touched && control.dirty && control.valid;
+  }
+
+  saveForm() {
+    this.savingFormData = true;
+    this._customerContext.saveCustomer(this.customerForm.value)
+      .pipe(catchError(error => {
+        this.savingFormData = false;
+        this._matSnackbarContext.open(error);
+        throw new Error(error);
+      }))
+      .subscribe((response: any) => {
+        this.savingFormData = false;
+        this._matSnackbarContext.open(response.message);
+      })
   }
 
 }

@@ -11,7 +11,9 @@ export function dobValidator(control: AbstractControl) {
         const age_dt = new Date(diff_ms);
         const years = Math.abs(age_dt.getUTCFullYear() - 1970);
         const invalidDOB = years < 18;
-        if (invalidDOB) return { invalidDOB: { actualValue: control.value, ageAsOnDate: years } };
+        if (invalidDOB) return {
+            invalidDOB: { actualValue: control.value, ageAsOnDate: years }
+        };
     }
     return null;
 }

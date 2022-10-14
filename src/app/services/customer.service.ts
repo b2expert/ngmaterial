@@ -34,8 +34,8 @@ export class CustomerService extends EndPoint {
     saveCustomer(input: ICustomerData) {
         return of({id: 1, message: 'Form data got saved!'})
         .pipe(delay(1000))
-        .pipe(map(respose => {
-            throw new Error("Some custom error!");
-        }))
+        // .pipe(map(respose => {
+        //     throw new Error("Some custom error!");
+        // }))
     }
 }
