@@ -4,3 +4,4 @@ export * from './http.service';
 export * from './auth-guard';
 export * from './customer.service';
 export * from './customer-form.service';
+export * from './country-state-city.service';
