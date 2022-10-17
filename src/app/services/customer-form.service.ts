@@ -46,4 +46,23 @@ export class CustomerFormService extends MessageValidator {
             })
         })
     }
+
+    initStaticArrayFormExample() {
+        return this._fb.group({
+            names: this._fb.group({
+                firstName: this._fb.control('', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
+                middleName: this._fb.control('', [Validators.minLength(3), Validators.maxLength(20)]),
+                lastName: this._fb.control('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
+            }),
+            addresses: this._fb.array([this.addAddressGroup()])
+        })
+    }
+
+    addAddressGroup() {
+        return this._fb.group({
+            country: this._fb.control('', [Validators.required]),
+            state: this._fb.control('', [Validators.required]),
+            city: this._fb.control('', [Validators.required]),
+        })
+    }
 }

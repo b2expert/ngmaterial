@@ -1,19 +1,19 @@
 <div class="form-container">
-    <form (submit)="handleFormSubmit()">
+    <form (submit)="handleFormSubmit()" [formGroup]="customerForm">
         <mat-card>
             <mat-card-header>
                 <mat-card-title>Name Details</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                <div class="row">
+                <div class="row" formGroupName="names">
                     <mat-form-field>
-                        <input matInput name="firstName" placeholder="Enter first name..." />
+                        <input matInput name="firstName" formControlName="firstName" placeholder="Enter first name..." />
                     </mat-form-field>
                     <mat-form-field>
-                        <input matInput name="middleName" placeholder="Enter middle name..." />
+                        <input matInput name="middleName" formControlName="middleName" placeholder="Enter middle name..." />
                     </mat-form-field>
                     <mat-form-field>
-                        <input matInput name="lastName" placeholder="Enter last name..." />
+                        <input matInput name="lastName" formControlName="lastName" placeholder="Enter last name..." />
                     </mat-form-field>
                 </div>
             </mat-card-content>
@@ -21,11 +21,30 @@
         <mat-divider></mat-divider>
         <mat-card style="margin-top:1rem">
             <mat-card-header>
-                <mat-card-title>Addresses</mat-card-title>
+                <mat-card-title>Addresses <mat-icon matSuffix color="primary" (click)="addAddress()">add_circle</mat-icon></mat-card-title>
             </mat-card-header>
-            <mat-card-content>
-                <div class="row">
-                    Address group will appear
+            <mat-card-content formArrayName="addresses">
+                <div style="position: relative;" class="row" *ngFor="let address of addresses.controls; let rowIndex = index">
+
+                    <mat-icon *ngIf="rowIndex > 0" style="position: absolute; right: 0" (click)="removeAddress(rowIndex)">cancel</mat-icon>
+
+                    <ng-container formGroupName="{{rowIndex}}">
+                        <mat-form-field>
+                            <input matInput name="country" [matAutocomplete]="countryAutoComplete" formControlName="country" placeholder="Select country" />
+                            <mat-autocomplete #countryAutoComplete="matAutocomplete" [displayWith]="displayCountryName">
+                                <mat-option [value]="row" *ngFor="let row of countries$ | async">{{row.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput name="state" [matAutocomplete]="stateAutoComplete" formControlName="state" placeholder="Select state" />
+                            <mat-autocomplete #stateAutoComplete="matAutocomplete" [displayWith]="displayStateName">
+                                <mat-option [value]="row" *ngFor="let row of states$ | async">{{row.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput name="city" formControlName="city" placeholder="Enter city name" />
+                        </mat-form-field>
+                    </ng-container>
                 </div>
             </mat-card-content>
         </mat-card>
