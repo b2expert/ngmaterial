@@ -5,6 +5,7 @@ import { TemplateDrivenComponent } from './template-driven/template-driven.compo
 import { SharedModule } from 'src/app/shared.module';
 import { RouterModule } from '@angular/router';
 import { ReactiveSimpleComponent } from './reactive-simple/reactive-simple.component';
+import { ReactiveArrayComponent } from './reactive-array/reactive-array.component';
 
 
 
@@ -12,7 +13,8 @@ import { ReactiveSimpleComponent } from './reactive-simple/reactive-simple.compo
   declarations: [
     FormsComponent,
     TemplateDrivenComponent,
-    ReactiveSimpleComponent
+    ReactiveSimpleComponent,
+    ReactiveArrayComponent
   ],
   imports: [
     SharedModule,

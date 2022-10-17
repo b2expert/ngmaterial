@@ -1,0 +1,39 @@
+<div class="form-container">
+    <form (submit)="handleFormSubmit()">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Name Details</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row">
+                    <mat-form-field>
+                        <input matInput name="firstName" placeholder="Enter first name..." />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput name="middleName" placeholder="Enter middle name..." />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput name="lastName" placeholder="Enter last name..." />
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <mat-divider></mat-divider>
+        <mat-card style="margin-top:1rem">
+            <mat-card-header>
+                <mat-card-title>Addresses</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row">
+                    Address group will appear
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <mat-divider></mat-divider>
+
+        <div class="btn-group">
+            <button mat-stroked-button color="primary" type="button">Reset</button>
+            <button mat-raised-button color="accent">Save</button>
+        </div>
+    </form>
+</div>

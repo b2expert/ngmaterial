@@ -18,13 +18,13 @@ const STATIC_INFOS = {
     dob: 'Enter a valid dob(e.g DOB must be greater than or euqal to 18yrs as of current date)'
 }
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class CustomerFormService extends MessageValidator {
 
     get staticInfos() {
         return STATIC_INFOS;
     }
-    
+
     constructor(private _fb: FormBuilder) {
         super();
     }

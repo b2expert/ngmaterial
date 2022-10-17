@@ -10,8 +10,9 @@
     <div class="col">
         <mat-radio-group aria-label="Select a form" name="formGroup" (change)="onOptionChange($event)" [(ngModel)]="formTypeId">
             <mat-radio-button value="1">Template Driven Static Form</mat-radio-button>
-            <mat-radio-button value="2">Reactive Static Form</mat-radio-button>
-            <mat-radio-button value="3">Reactive Dynamic Form</mat-radio-button>
+            <mat-radio-button value="2">Reactive Form Group</mat-radio-button>
+            <mat-radio-button value="3">Reactive Form Array</mat-radio-button>
+            <mat-radio-button value="4">Reactive Dynamic</mat-radio-button>
           </mat-radio-group>
     </div>
 </div>
@@ -21,6 +22,7 @@
         <ng-container [ngSwitch]="formTypeId">
             <ng-container *ngSwitchCase="1"><app-template-driven></app-template-driven></ng-container>
             <ng-container *ngSwitchCase="2"><app-reactive-simple></app-reactive-simple></ng-container>
+            <ng-container *ngSwitchCase="3"><app-reactive-array></app-reactive-array></ng-container>
         </ng-container>
     </div>
 </div>
