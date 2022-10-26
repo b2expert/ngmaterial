@@ -6,3 +6,4 @@ export * from './customer-model';
 export * from './custom-validator';
 export * from './message-validator';
 export * from './country-state-city-model';
+export * from './form-model';

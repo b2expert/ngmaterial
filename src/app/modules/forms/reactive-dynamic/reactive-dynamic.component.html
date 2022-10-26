@@ -1,0 +1,102 @@
+<ng-template #loading>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>
+
+<div class="form-container" *ngIf="formContext.elements && formContext.form else loading">
+    <form [formGroup]="formContext.form" (submit)="handleOnFormSubmit()">
+        <mat-card style="margin-top: 1rem" *ngFor="let group of formContext.elements | keyvalue:keyDescOrder">
+            <mat-card-header *ngIf="group.key">
+                <mat-card-title>{{group.key}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row">
+                    <ng-container formGroupName="{{group.key}}">
+                        <ng-container *ngFor="let element of group.value">
+
+                            <ng-container [ngSwitch]="element.attrType">
+
+                                <ng-container *ngSwitchCase="'NUMBER'">
+                                    <mat-form-field>
+                                        <input matInput type="number" [formControlName]="element.attrName"
+                                            [placeholder]="element.attrPlaceHolder || ''" />
+
+                                        <ng-template *ngTemplateOutlet="infoTempRef; context: {element: element}">
+                                        </ng-template>
+
+                                    </mat-form-field>
+                                </ng-container>
+
+                                <ng-container *ngSwitchCase="'RADIO'">
+                                    <div class="radio-group">
+                                        <mat-label for="">{{element.displayName || ''}}</mat-label>
+                                        <mat-radio-group [formControlName]="element.attrName">
+                                            <mat-radio-button [value]="option" *ngFor="let option of element.options">
+                                                {{option.title}}
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                        <ng-template *ngTemplateOutlet="infoTempRef; context: {element: element}">
+                                        </ng-template>
+                                    </div>
+                                </ng-container>
+
+                                <ng-container *ngSwitchCase="'AUTO_SUGESSIONS'">
+                                    <mat-form-field>
+                                        <input matInput [matAutocomplete]="auto" [formControlName]="element.attrName"
+                                            [placeholder]="element.attrPlaceHolder || ''" />
+                                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayOptionName">
+                                            <mat-option *ngFor="let option of element.options" [value]="option">
+                                                {{option.title}}</mat-option>
+                                        </mat-autocomplete>
+                                        <ng-template *ngTemplateOutlet="infoTempRef; context: {element: element}">
+                                        </ng-template>
+                                    </mat-form-field>
+                                </ng-container>
+
+                                <ng-container *ngSwitchCase="'SELECT'">
+                                    <mat-form-field>
+                                        <mat-select [formControlName]="element.attrName"
+                                            [placeholder]="element.attrPlaceHolder || ''">
+                                            <mat-option *ngFor="let option of element.options" [value]="option">
+                                                {{option.title}}</mat-option>
+                                        </mat-select>
+                                        <ng-template *ngTemplateOutlet="infoTempRef; context: {element: element}">
+                                        </ng-template>
+                                    </mat-form-field>
+                                </ng-container>
+
+                                <ng-container *ngSwitchDefault>
+                                    <mat-form-field>
+                                        <input matInput [formControlName]="element.attrName"
+                                            [placeholder]="element.attrPlaceHolder || ''" />
+                                        <ng-template *ngTemplateOutlet="infoTempRef; context: {element: element}">
+                                        </ng-template>
+                                    </mat-form-field>
+                                </ng-container>
+
+                            </ng-container>
+
+                        </ng-container>
+                    </ng-container>
+                </div>
+
+                <ng-template #infoTempRef let-element="element">
+                    <mat-icon matSuffix color="accent" *ngIf="!validate(group.key, element.attrName)"
+                        [matTooltip]="element.validations.hints">info</mat-icon>
+                    <mat-icon matSuffix class="text-success" *ngIf="validate(group.key, element.attrName)">
+                        done
+                    </mat-icon>
+                    <mat-error *ngIf="formContext.errorMessages[element.attrName]">
+                        {{formContext.errorMessages[element.attrName]}}
+                    </mat-error>
+                </ng-template>
+
+            </mat-card-content>
+        </mat-card>
+        <mat-divider></mat-divider>
+
+        <div class="btn-group">
+            <button mat-stroked-button color="primary" type="button">Reset</button>
+            <button mat-raised-button color="accent" [disabled]="formContext.form.invalid">Save</button>
+        </div>
+    </form>
+</div>

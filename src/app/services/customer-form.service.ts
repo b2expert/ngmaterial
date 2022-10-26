@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { dobValidator, MessageValidator } from "../models";
+import { map } from "rxjs";
+import { AppForm, dobValidator, MessageValidator } from "../models";
+import { CustomerService } from "./customer.service";
 
 const REGEX_PATTERNS = {
     email: '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$',
@@ -19,14 +21,15 @@ const STATIC_INFOS = {
 }
 
 @Injectable({ providedIn: 'root' })
-export class CustomerFormService extends MessageValidator {
+export class CustomerFormService extends AppForm {
 
-    get staticInfos() {
-        return STATIC_INFOS;
+    constructor(public override _fb: FormBuilder, public customerContext: CustomerService) {
+        super(_fb);
     }
 
-    constructor(private _fb: FormBuilder) {
-        super();
+    //#region Static Form Context
+    get staticInfos() {
+        return STATIC_INFOS;
     }
 
     initStaticCustomerForm() {
@@ -65,4 +68,52 @@ export class CustomerFormService extends MessageValidator {
             city: this._fb.control('', [Validators.required]),
         })
     }
+    //#endregion
+
+    //#region Dynamic Form(Meta data driven)
+    errorMessages: { [key: string]: string } = {};
+    formElements: any[] = [];
+
+    initDynamicForm() {
+        return this.customerContext.loadForm().pipe(map(elements => {
+            this.formElements = elements;
+
+            // TODO: Load reference data if any
+            this.formElements.forEach(element => {
+                if(element.dataRef && !element.dElement) {
+                    this._assignControlOptions(element, '');
+                }
+            });
+
+            // TODO: Fetch and assign options on load if any            
+            return this.build(elements, this.onControlChange);
+        }));
+    }
+
+    onControlChange(groupKey: string, element: any, value: any, index: number) {
+        if (this?.form)
+            this.errorMessages = this.processMessages(this.form);
+
+        // TODO: Fetch control reference list on control change for dependant control
+        if (value) {
+            const depandantElement = this.formElements.find(el => el.dElement === element.attrName);
+            if (depandantElement) {
+                // TODO: Update value with null
+                this.form.controls[groupKey].get(depandantElement.attrName)?.patchValue('');
+                this._assignControlOptions(depandantElement, value);
+            }
+        }
+    }
+
+    private _assignControlOptions(element: any, param: any) {
+        let dataPath = `${element.dataRef}`;
+        if (param && element.dataRef.includes('{rowId}')) { // Dependant path
+            dataPath = element.dataRef.replace('{rowId}', param.rowId);
+        }
+        this.customerContext.loadReferenceOptions(dataPath)
+            .subscribe(options => {
+                element.options = options;
+            });
+    }
+    //#endregion
 }

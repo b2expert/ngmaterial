@@ -6,6 +6,7 @@ import { SharedModule } from 'src/app/shared.module';
 import { RouterModule } from '@angular/router';
 import { ReactiveSimpleComponent } from './reactive-simple/reactive-simple.component';
 import { ReactiveArrayComponent } from './reactive-array/reactive-array.component';
+import { ReactiveDynamicComponent } from './reactive-dynamic/reactive-dynamic.component';
 
 
 
@@ -14,7 +15,8 @@ import { ReactiveArrayComponent } from './reactive-array/reactive-array.componen
     FormsComponent,
     TemplateDrivenComponent,
     ReactiveSimpleComponent,
-    ReactiveArrayComponent
+    ReactiveArrayComponent,
+    ReactiveDynamicComponent
   ],
   imports: [
     SharedModule,

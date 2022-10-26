@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { delay, map, of } from "rxjs";
+import { environment } from "src/environments/environment";
 import { EndPoint, ICustomerData } from "../models";
 import { IGrid, ICustomerFilter, Grid } from "../modules/data-grid/data-grid.model";
 import { AppHttpService } from "./http.service";
@@ -29,6 +30,14 @@ export class CustomerService extends EndPoint {
                 this._customerGridData = apiResponse.data as IGrid;
                 return this._customerGridData;
             }));
+    }
+
+    loadForm() {
+        return this._httpClient.get(this.formElementsUrl).pipe(map(apiResponse => apiResponse.data))
+    }
+
+    loadReferenceOptions(dataPath: string) {
+        return this._httpClient.get(environment.apiBaseUrl + dataPath).pipe(map(apiResponse => apiResponse.data));
     }
 
     saveCustomer(input: ICustomerData) {
