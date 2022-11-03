@@ -33,7 +33,11 @@
 
         <ng-container matColumnDef="totalOrder">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>Total Order</th>
-            <td mat-cell *matCellDef="let customer">{{ customer.totalOrder }}</td>
+            <td mat-cell *matCellDef="let customer">
+                {{ customer.totalOrder }}
+
+                <mat-icon style="margin-left: 2rem;cursor:pointer;" (click)="handleRowClick(customer)">edit</mat-icon>
+            </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -1,0 +1,25 @@
+<h2>Update Customer</h2>
+<hr>
+<form (submit)="handleFormSubmit()">
+
+    <mat-form-field>
+        <input matInput preventSpace placeholder="Enter customer name here..." [(ngModel)]="dialogData.custName" name="custName" required>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput preventSpace placeholder="Enter mobile number here..." [(ngModel)]="dialogData.mobileNo" name="mobileNo" required>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput preventSpace placeholder="Enter dob here..." name="dob" [(ngModel)]="dialogData.dob" required>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput preventSpace placeholder="Enter orders here..." name="orders" [(ngModel)]="dialogData.totalOrder" required>
+    </mat-form-field>
+    
+    <hr>
+
+    <button mat-raised-button type="button" (click)="handleResetClick()">Reset</button>
+    <button mat-raised-button type="submit">Save</button>
+</form>
