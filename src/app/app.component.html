@@ -64,6 +64,22 @@
           Table
         </a>
       </div>
+      <div [ngClass]="{'active': activeNav === 'select'}">
+        <a routerLink="select">
+          <span class="material-icons d-block">
+            done_all
+          </span>
+          Select
+        </a>
+      </div>
+      <div [ngClass]="{'active': activeNav === 'forms'}">
+        <a routerLink="forms">
+          <span class="material-icons d-block">
+            library_books
+          </span>
+          Forms
+        </a>
+      </div>
     </mat-sidenav>
 
     <mat-sidenav-content class="sidenav-content">

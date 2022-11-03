@@ -1,0 +1,49 @@
+<div id="data-table-wrapper">
+
+    <div class="disable-table" *ngIf="loadingRecords">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <mat-form-field>
+        <input matInput type="text" name="searchString" [(ngModel)]="inputFilter.searchString"
+            (input)="onSearchString()" (keydown)="onKeyDown()" placeholder="Search by name, mobile etc...">
+        <button *ngIf="inputFilter.searchString" matSuffix mat-icon-button
+            (click)="inputFilter.searchString = ''; onResetSearch()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container [matColumnDef]="col.prop" *ngFor="let col of columns; let colIndex = index">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>{{col.title}}</th>
+            <ng-container *ngIf="colIndex === 0">
+                <td mat-cell *matCellDef="let customer; let rowIndex = index">{{ colIndex + rowIndex + 1 }}</td>
+            </ng-container>
+            <ng-container *ngIf="colIndex > 0">
+                <td mat-cell *matCellDef="let customer;">
+                    <button *ngIf="col.metaData?.imgSrc" mat-mini-fab disabled>
+                        <img [src]="customer.imgSrc | filePath" alt="" />
+                    </button>
+                    {{customer[col.prop]}}
+                </td>
+            </ng-container>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="custName">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Customer</th>
+            <td mat-cell *matCellDef="let customer">
+                <button mat-mini-fab disabled>
+                    <img [src]="customer.profilePic | filePath" alt="" />
+                </button>
+                {{ customer.custName }} ({{ customer.custCode }})
+            </td>
+        </ng-container> -->
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+    <mat-paginator [length]="totalRecords" showFirstLastButtons="true" [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+</div>

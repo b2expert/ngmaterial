@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col">
+        <mat-form-field>
+            <mat-label>Search customer with form control</mat-label>
+            <mat-chip-list #selectedCustomerList>
+
+                <mat-chip *ngIf="selectedCustomers.length">{{selectedCustomers[0].custName}}</mat-chip>
+                <mat-chip *ngIf="selectedCustomers.length > 1">
+                    <span class="other-selections">(+{{selectedCustomers.length - 1}} more)</span>
+                </mat-chip>
+
+                <input type="text" #searchCtrlInput matInput [formControl]="searchCtrl"
+                    [matChipInputFor]="selectedCustomerList" [matAutocomplete]="customerSugessionPanelRef"
+                    (input)="onInputChange()" placeholder="Search more customer here..." />
+                <mat-icon *ngIf="selectedCustomers.length" (click)="resetPanelOptions()">close</mat-icon>
+            </mat-chip-list>
+
+            <mat-autocomplete #customerSugessionPanelRef="matAutocomplete" (opened)="reorderOptions()"
+                (optionSelected)="onOptionSelect($event)">
+                <mat-option [value]="customer" *ngFor="let customer of customers$ | async">
+                    <mat-checkbox [checked]="checkSelectedCustomer(customer)">{{customer.custName}}</mat-checkbox>
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </div>
+</div>

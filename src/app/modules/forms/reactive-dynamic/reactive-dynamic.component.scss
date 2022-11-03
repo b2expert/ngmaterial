@@ -1,0 +1,29 @@
+.form-container {
+    .row {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        mat-form-field {
+            width: auto;
+            flex-grow: 1;
+            margin: 1em;
+
+            mat-icon {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+        }
+    }
+
+    .btn-group {
+        margin: 2em;
+        display: table;
+        float: right;
+        button {
+            display: table-cell;
+            margin-left: 1em;
+        }
+    }
+}

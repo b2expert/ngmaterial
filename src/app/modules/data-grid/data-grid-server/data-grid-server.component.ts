@@ -18,7 +18,7 @@ export class DataGridServerComponent implements OnInit, AfterViewInit {
   inputFilter: ICustomerFilter;
   loadingRecords: boolean;
   private _subscriptions: Subscription[];
-  private _typingTimmer: any;
+  private _timeoutId: any;
   @ViewChild(MatSort) sort!: MatSort
   @ViewChild(MatPaginator) paginator!: MatPaginator
 
@@ -33,11 +33,11 @@ export class DataGridServerComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.sort.sortChange.subscribe(sort => {
-      this.onSorting(sort);
+      this.onColumnSort(sort);
     });
     this.paginator.page.subscribe(page => {
-      this.onPaging(page);
-    });
+      this.onPagination(page);
+    })
   }
 
   ngOnInit(): void {
@@ -46,37 +46,37 @@ export class DataGridServerComponent implements OnInit, AfterViewInit {
     });
   }
 
-  onInputSearch() {
-    clearTimeout(this._typingTimmer);
+  onColumnSort(sort: Sort) {
+    this.inputFilter = { ...this.inputFilter, column: sort.active, sort: sort.direction };
+    this._filterGridData(this.inputFilter);
+  }
+
+  onPagination(page: PageEvent) {
+    this.inputFilter = { ...this.inputFilter, page: page.pageIndex + 1, perPage: page.pageSize };
+    this._filterGridData(this.inputFilter);
+  }
+
+  onSearchString() {
+    clearTimeout(this._timeoutId);
+
     if ((this.inputFilter.searchString?.length || 0) >= 3)
-      this._typingTimmer = setTimeout(() => {
-        this.inputFilter = { ...this.inputFilter, page: 1 }
-        this._filterGridData(this.inputFilter);
+      this._timeoutId = setTimeout(() => {
+        this._filterGridData({ ...this.inputFilter });
       }, 500);
   }
 
-  onKeydownSearch() {
-    clearTimeout(this._typingTimmer);
+  onKeyDown() {
+    clearTimeout(this._timeoutId);
   }
 
-  onSorting(sort: Sort) {
-    this.inputFilter = { ...this.inputFilter, sort: sort.direction, column: sort.active }
+  onResetSearch() {
     this._filterGridData(this.inputFilter);
-  }
-
-  onPaging(page: PageEvent) {
-    this.inputFilter = { ...this.inputFilter, page: page.pageIndex + 1, perPage: page.pageSize }
-    this._filterGridData(this.inputFilter);
-  }
-
-  onReset() {
-    this._filterGridData({...this.inputFilter});
   }
 
   private _filterGridData(input: ICustomerFilter) {
     this.loadingRecords = true;
     this._subscriptions.push(
-      this._gridContext.loadCustomers(input)
+      this._gridContext.customer.loadCustomers(input)
         .pipe(catchError(error => {
           this.dataSource = [];
           this.totalRecords = 0;

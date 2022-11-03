@@ -1,10 +1,12 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { map, Subscription } from 'rxjs';
 import { ICustomer, ICustomerFilter, IGrid } from '../data-grid.model';
 import { DataGridService } from '../data-grid.service';
+import { CustFormComponent } from './cust-form/cust-form.component';
 
 @Component({
   selector: 'app-data-grid-client',
@@ -21,7 +23,7 @@ export class DataGridClientComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort
   @ViewChild(MatPaginator) paginator!: MatPaginator
 
-  constructor(private _gridContext: DataGridService) {
+  constructor(private _gridContext: DataGridService, private _dialogContext: MatDialog) {
     this.dataSource = new MatTableDataSource();
     this.displayedColumns = [];
     this.totalRecords = 0;
@@ -49,10 +51,17 @@ export class DataGridClientComponent implements OnInit {
     });
   }
 
+  handleRowClick(customer: ICustomer) {
+    this._dialogContext.open(CustFormComponent, {
+      data: { ...customer },
+      autoFocus: false
+    })
+  }
+
   private _filterGridData(input: ICustomerFilter) {
 
     this._subscriptions.push(
-      this._gridContext.loadCustomers(input)
+      this._gridContext.customer.loadCustomers(input)
         .pipe(map(catchError => {
           this.dataSource = new MatTableDataSource();
           this.totalRecords = 0;

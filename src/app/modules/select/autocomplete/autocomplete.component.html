@@ -1,0 +1,32 @@
+<div class="row">
+    <!-- <div class="col">
+       <mat-form-field>
+        <mat-label>Search customer with ngModel</mat-label>
+        <input type="text" 
+        matInput 
+        [(ngModel)]="filterCustomer.searchString"
+        (keydown)="onKeyDown()"
+        (input)="onCustomerFilter()"
+        [matAutocomplete]="customerSugessionPanelRef"
+        placeholder="Search more customer here..." />
+
+        <mat-autocomplete #customerSugessionPanelRef="matAutocomplete" [displayWith]="displayCustomerName">
+            <mat-option [value]="customer" *ngFor="let customer of customers$ | async">{{customer.custName}}</mat-option>
+        </mat-autocomplete>
+       </mat-form-field>
+    </div> -->
+    <div class="col">
+        <mat-form-field>
+         <mat-label>Search customer with form control</mat-label>
+         <input type="text" 
+         matInput 
+         [formControl]="searchCtrl"
+         [matAutocomplete]="customerSugessionPanelRef"
+         placeholder="Search more customer here..." />
+ 
+         <mat-autocomplete #customerSugessionPanelRef="matAutocomplete" [displayWith]="displayCustomerName">
+             <mat-option [value]="customer" *ngFor="let customer of customers$ | async">{{customer.custName}}</mat-option>
+         </mat-autocomplete>
+        </mat-form-field>
+     </div>
+</div>

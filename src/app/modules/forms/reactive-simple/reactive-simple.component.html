@@ -1,0 +1,84 @@
+<mat-progress-bar mode="indeterminate" *ngIf="savingFormData"></mat-progress-bar>
+<div class="form-container">
+    <form [formGroup]="customerForm" (submit)="saveForm()">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Name Details</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row" formGroupName="names">
+                    <mat-form-field>
+                        <input matInput name="firstName" formControlName="firstName" placeholder="Enter first name..." />
+                        <mat-error *ngIf="displayMessage['firstName']">{{displayMessage['firstName']}}</mat-error>
+                        <mat-icon matSuffix color="accent" *ngIf="!validate('names', 'firstName')" [matTooltip]="formContext.staticInfos['firstName']">info</mat-icon>
+                        <mat-icon matSuffix class="text-success" *ngIf="validate('names', 'firstName')">done</mat-icon>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput name="middleName" formControlName="middleName" placeholder="Enter middle name..." />
+                        <mat-error *ngIf="displayMessage['middleName']">{{displayMessage['middleName']}}</mat-error>
+                        <mat-icon matSuffix color="accent" *ngIf="!validate('names', 'middleName')" [matTooltip]="formContext.staticInfos['middleName']">info</mat-icon>
+                        <mat-icon matSuffix class="text-success" *ngIf="validate('names', 'middleName')">done</mat-icon>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput name="lastName" formControlName="lastName" placeholder="Enter last name..." />
+                        <mat-error *ngIf="displayMessage['lastName']">{{displayMessage['lastName']}}</mat-error>
+                        <mat-icon matSuffix color="accent" *ngIf="!validate('names', 'lastName')" [matTooltip]="formContext.staticInfos['lastName']">info</mat-icon>
+                        <mat-icon matSuffix class="text-success" *ngIf="validate('names', 'lastName')">done</mat-icon>
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <mat-divider></mat-divider>
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Contact Details</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row" formGroupName="contacts">
+                    <mat-form-field>
+                        <input matInput name="mobileNo" formControlName="mobileNo" placeholder="Enter mobile number..." />
+                        <mat-error *ngIf="displayMessage['mobileNo']">{{displayMessage['mobileNo']}}</mat-error>
+                        <mat-icon matSuffix color="accent" *ngIf="!validate('contacts', 'mobileNo')" [matTooltip]="formContext.staticInfos['mobileNo']">info</mat-icon>
+                        <mat-icon matSuffix class="text-success" *ngIf="validate('contacts', 'mobileNo')">done</mat-icon>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput name="phoneNo" formControlName="phoneNo" placeholder="Enter phone number..." />
+                        <mat-error *ngIf="displayMessage['phoneNo']">{{displayMessage['phoneNo']}}</mat-error>
+                        <mat-icon matSuffix color="accent" *ngIf="!validate('contacts', 'phoneNo')" [matTooltip]="formContext.staticInfos['phoneNo']">info</mat-icon>
+                        <mat-icon matSuffix class="text-success" *ngIf="validate('contacts', 'phoneNo')">done</mat-icon>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput name="email" formControlName="email" placeholder="Enter email address..." />
+                        <mat-error *ngIf="displayMessage['email']">{{displayMessage['email']}}</mat-error>
+                        <mat-icon matSuffix color="accent" *ngIf="!validate('contacts', 'email')" [matTooltip]="formContext.staticInfos['email']">info</mat-icon>
+                        <mat-icon matSuffix class="text-success" *ngIf="validate('contacts', 'email')">done</mat-icon>
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <mat-divider></mat-divider>
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Other Details</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row" formGroupName="others">
+                    <mat-form-field>
+                        <input matInput type="date" name="dob" formControlName="dob" placeholder="Enter dob..." />
+                        <mat-error *ngIf="displayMessage['dob']">{{displayMessage['dob']}}</mat-error>
+                        <mat-icon matSuffix color="accent" *ngIf="!validate('others', 'dob')" [matTooltip]="formContext.staticInfos['dob']">info</mat-icon>
+                        <mat-icon matSuffix class="text-success" *ngIf="validate('others', 'dob')">done</mat-icon>
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <mat-divider></mat-divider>
+
+        <div class="btn-group">
+            <button mat-stroked-button color="primary" type="button" (click)="customerForm.reset()">Reset</button>
+            <button mat-raised-button color="accent" [disabled]="customerForm.invalid || savingFormData">
+                {{savingFormData ? 'Please wait...': 'Save'}}
+            </button>
+        </div>
+    </form>
+</div>
