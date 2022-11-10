@@ -1,0 +1,14 @@
+<div class="product">
+    <ng-container *ngIf="inputProduct else noContextRef">
+        <div class="content">
+            <h2>{{inputProduct.name}}</h2>
+            <h3>{{inputProduct.price | currency: 'INR'}}</h3>
+            <hr>
+            <app-add-to-cart [product]="inputProduct"></app-add-to-cart>
+        </div>
+    </ng-container>
+</div>
+
+<ng-template #noContextRef>
+    <p>No Content!</p>
+</ng-template>

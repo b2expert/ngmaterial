@@ -28,6 +28,12 @@ const routes: Routes = [
     loadChildren: () => import('./modules/forms/forms.module').then(m => m.AppFormsModule)
   },
   {
+    path: 'ecart',
+    canActivate: [AuthGuard],
+    data: { activeNav: 'ecart' },
+    loadChildren: () => import('./modules/ecart/ecart.module').then(m => m.EcartModule)
+  },
+  {
     path: 'session/expired',
     loadChildren: () => import('./modules/session-expired/session-expired.module').then(m => m.SessionExpiredModule)
   }

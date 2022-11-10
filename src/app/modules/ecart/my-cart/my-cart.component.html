@@ -1,0 +1,24 @@
+<div class="my-cart">
+    <h3>My cart Items</h3>
+    <hr>
+    <div class="items">
+        <table>
+            <tr>
+                <th>Prodcut</th>
+                <th>Price</th>
+                <th>QTY</th>
+            </tr>
+            <tr *ngFor="let product of cartContext.products">
+                <td>{{product.name}}</td>
+                <td>{{product.price | currency: 'INR'}}</td>
+                <td><input type="number" min="0" [(ngModel)]="product.qty" /></td>
+            </tr>
+        </table>
+    </div>
+    <hr>
+
+    <div class="summary">
+        <label for="total">Amount to be paid: <b>{{cartContext.totalAmount | currency: 'INR'}}</b></label>
+        <button mat-raised-button color="primary">Checkout</button>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<div id="ecart-wrapper">
+    <header>
+        <h1>E-Cart Example <span class="sub-title">(Component Communication, EventEmitter, Subject)</span></h1>
+        <div><app-cart-summary></app-cart-summary> </div>         
+    </header>
+    <mat-divider></mat-divider>    
+    <main *ngIf="products$ | async as products">
+        <ng-container *ngFor="let product of products">
+           <div><app-product [product]="product"></app-product></div>
+        </ng-container>
+    </main>
+</div>

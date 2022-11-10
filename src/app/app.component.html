@@ -1,5 +1,6 @@
 <div id="container">
   <header>
+    <mat-progress-bar mode="indeterminate" *ngIf="!authContext.user"></mat-progress-bar>
     <mat-toolbar>
       <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
@@ -78,6 +79,14 @@
             library_books
           </span>
           Forms
+        </a>
+      </div>
+      <div [ngClass]="{'active': activeNav === 'ecart'}">
+        <a routerLink="ecart">
+          <span class="material-icons d-block">
+            store
+          </span>
+          E-Cart
         </a>
       </div>
     </mat-sidenav>

@@ -1,0 +1,4 @@
+<button mat-raised-button color="primary" (click)="cartContext.addToCart(product); addedToCart = !addedToCart"
+    [disabled]="addedToCart">
+    {{addedToCart ? 'Added to cart': 'Add To Cart'}}
+</button>

@@ -1,0 +1,19 @@
+.my-cart {
+    .items {
+        table {
+            border-collapse: collapse;
+
+            td,
+            th {
+                border: 1px solid #eee;
+                padding: 10px;
+            }
+        }
+    }
+
+    .summary {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
