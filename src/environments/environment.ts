@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'https://ytc.beginner2expert.com/angular14/api/public/'
+  apiBaseUrl: 'https://ytc.beginner2expert.com/angular14/api/public/',
+  apiImageBaseUrl: 'https://ytc.beginner2expert.com/angular14/api/'
 };
 
 /*

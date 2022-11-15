@@ -7,6 +7,7 @@ import { DataGridClientComponent } from './data-grid-client/data-grid-client.com
 import { DataGridServerComponent } from './data-grid-server/data-grid-server.component';
 import { DataGridDynamicComponent } from './data-grid-dynamic/data-grid-dynamic.component';
 import { CustFormComponent } from './data-grid-client/cust-form/cust-form.component';
+import { DgcFilterComponent } from './data-grid-client/dgc-filter/dgc-filter.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { CustFormComponent } from './data-grid-client/cust-form/cust-form.compon
     DataGridClientComponent,
     DataGridServerComponent,
     DataGridDynamicComponent,
-    CustFormComponent
+    CustFormComponent,
+    DgcFilterComponent
   ],
   imports: [
     SharedModule,

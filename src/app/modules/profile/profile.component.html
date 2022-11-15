@@ -1,0 +1,10 @@
+<div id="profile">
+    <div class="avatar-wrapper">
+        <img [src]="authContext.user.profilePic" alt="">
+        <label for="profilepicInput">
+            <mat-icon>edit</mat-icon>
+            <input type="file" id="profilepicInput" (change)="onFileChange($event)" style="display: none;">
+        </label>
+    </div>
+    <div></div>
+</div>

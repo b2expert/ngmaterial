@@ -28,6 +28,12 @@ export class CustomerService extends EndPoint {
             .get(`${this.customerListUrl}?${this.utilityContext.serialize(input)}`)
             .pipe(map(apiResponse => {
                 this._customerGridData = apiResponse.data as IGrid;
+                // Mapping cust profile image
+                this._customerGridData.rows = this._customerGridData.rows.map((row: any) => {
+                    row.profilePic = row.imgSrc;
+                    return row;
+                });
+
                 return this._customerGridData;
             }));
     }

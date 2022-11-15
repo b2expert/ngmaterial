@@ -34,6 +34,12 @@ const routes: Routes = [
     loadChildren: () => import('./modules/ecart/ecart.module').then(m => m.EcartModule)
   },
   {
+    path: 'profile',
+    canActivate: [AuthGuard],
+    data: { activeNav: 'profile' },
+    loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule)
+  },
+  {
     path: 'session/expired',
     loadChildren: () => import('./modules/session-expired/session-expired.module').then(m => m.SessionExpiredModule)
   }

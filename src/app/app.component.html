@@ -15,13 +15,13 @@
       </div>
       <span class="spacer"></span>
       <button mat-mini-fab color="white" [matMenuTriggerFor]="menu">
-        <img class="avatar-as-icon" src="assets/avatar.png" alt="" srcset="">
+        <img class="avatar-as-icon" src="{{authContext.user.profilePic}}" alt="" srcset="">
       </button>
       <mat-menu #menu="matMenu">
         <mat-card class="example-card" [ngClass]="'profile-menu-card'">
           <div class="mat-card-custom-header">
             <div class="avatar-as-dp-wrapper">
-              <img mat-card-image class="avatar-as-dp" src="assets/avatar.png">
+              <img mat-card-image class="avatar-as-dp" src="{{authContext.user.profilePic}}">
               <button mat-mini-fab color="white" class="plus-photo">
                 <mat-icon>photo_camera</mat-icon>
               </button>
@@ -33,8 +33,10 @@
           </div>
           <mat-card-actions>
             <button mat-menu-item>
-              <mat-icon>account_circle</mat-icon>
-              <span>My Account</span>
+              <a routerLink="profile">
+                <mat-icon>account_circle</mat-icon>
+                <span>My Account</span>
+              </a>
             </button>
             <button mat-menu-item (click)="logout()">
               <mat-icon>logout</mat-icon>

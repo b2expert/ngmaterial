@@ -19,6 +19,7 @@ export class DataGridClientComponent implements OnInit {
   displayedColumns: string[];
   totalRecords: number;
   inputFilter: ICustomerFilter;
+  loading: boolean = false;
   private _subscriptions: Subscription[];
   @ViewChild(MatSort) sort!: MatSort
   @ViewChild(MatPaginator) paginator!: MatPaginator
@@ -29,6 +30,13 @@ export class DataGridClientComponent implements OnInit {
     this.totalRecords = 0;
     this._subscriptions = [];
     this.inputFilter = { column: 'rowId', dynamicCols: 0, enablePagination: 1, page: 1, perPage: 150, sort: 'desc', searchString: '' };
+    
+    this._gridContext.filter$.subscribe(filter => {
+      this._filterGridData({
+        ...this.inputFilter,
+        searchString: filter.searchString
+      });
+    });
   }
 
   ngOnInit(): void {
@@ -59,15 +67,17 @@ export class DataGridClientComponent implements OnInit {
   }
 
   private _filterGridData(input: ICustomerFilter) {
-
+    this.loading = true;
     this._subscriptions.push(
       this._gridContext.customer.loadCustomers(input)
         .pipe(map(catchError => {
           this.dataSource = new MatTableDataSource();
           this.totalRecords = 0;
+          this.loading = false;
           return catchError;
         }))
         .subscribe(response => {
+          this.loading = false;
           this.dataSource = new MatTableDataSource(response.rows);
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;

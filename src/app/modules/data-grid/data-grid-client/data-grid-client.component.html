@@ -1,8 +1,10 @@
 <div id="data-table-wrapper">
 
-    <div class="disable-table" *ngIf="!dataSource.data.length">
+    <div class="disable-table" *ngIf="loading">
         <mat-spinner></mat-spinner>
     </div>
+
+    <app-dgc-filter></app-dgc-filter>
 
     <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 

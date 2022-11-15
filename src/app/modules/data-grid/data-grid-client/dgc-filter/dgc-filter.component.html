@@ -1,0 +1,9 @@
+<form (submit)="handleFilterSubmit()">
+    <mat-form-field>
+        <input matInput name="custName" [(ngModel)]="inputFilter.searchString" placeholder="Filter by customer name/code/mobile number..." />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary">
+        <mat-icon>search</mat-icon>
+    </button>
+</form>
