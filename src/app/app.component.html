@@ -83,12 +83,20 @@
           Forms
         </a>
       </div>
-      <div [ngClass]="{'active': activeNav === 'ecart'}">
+      <!-- <div [ngClass]="{'active': activeNav === 'ecart'}">
         <a routerLink="ecart">
           <span class="material-icons d-block">
             store
           </span>
           E-Cart
+        </a>
+      </div> -->
+      <div [ngClass]="{'active': activeNav === 'orders'}">
+        <a routerLink="orders">
+          <span class="material-icons d-block">
+            history
+          </span>
+          Orders
         </a>
       </div>
     </mat-sidenav>

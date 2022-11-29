@@ -1,0 +1,15 @@
+<form (submit)="handleOrderFilteration()">
+
+    <div>
+        <label for="">Component With Model</label>
+        <app-customer-select name="customer" [(ngModel)]="customer" required></app-customer-select>
+    </div>
+    <div>
+        <label for="">Component With Form Control</label>
+        <app-customer-select [formControl]="customerControl"></app-customer-select>
+    </div>
+    <button mat-raised-button color="primary">
+        <mat-icon>search</mat-icon>
+        Filter
+    </button>
+</form>
