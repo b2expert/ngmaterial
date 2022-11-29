@@ -1,6 +1,6 @@
 <mat-form-field>
-    <label for="Select Customer">Select Customer</label>
-    <mat-select [(ngModel)]="customer">
+    <mat-select placeholder="Select Customer" [(ngModel)]="customer">
+        <mat-option>--Select--</mat-option>
         <mat-option [value]="customer" *ngFor="let customer of customers$ | async">{{customer.custName}}</mat-option>
     </mat-select>
 </mat-form-field>

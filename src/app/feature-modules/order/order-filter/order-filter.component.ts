@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Customer, ICustomer } from 'src/app/pages/data-grid/data-grid.model';
 
 @Component({
@@ -9,9 +9,8 @@ import { Customer, ICustomer } from 'src/app/pages/data-grid/data-grid.model';
 })
 export class OrderFilterComponent implements OnInit {
 
-  customerControl: FormControl = new FormControl();
-
   customer: ICustomer = new Customer();
+  customerCtrl: FormControl = new FormControl();
 
   constructor() { }
 
@@ -19,7 +18,8 @@ export class OrderFilterComponent implements OnInit {
   }
 
   handleOrderFilteration() {
-    console.info(this.customerControl.value);
+    console.info(this.customer);
+    console.info(this.customerCtrl);
   }
 
 }
