@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Customer, ICustomer } from 'src/app/pages/data-grid/data-grid.model';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-order-filter',
@@ -9,8 +8,13 @@ import { Customer, ICustomer } from 'src/app/pages/data-grid/data-grid.model';
 })
 export class OrderFilterComponent implements OnInit {
 
-  customer: ICustomer = new Customer();
-  customerCtrl: FormControl = new FormControl();
+  customerName1: string = 'Sample 149 Customer';
+  customerName2: string = 'Sample 148 Customer';
+  
+  custForm: FormGroup = new FormGroup({
+    cust1: new FormControl('Sample 150 Customer'),
+    cust2: new FormControl('Sample 150 Customer'),
+  })
 
   constructor() { }
 
@@ -18,8 +22,9 @@ export class OrderFilterComponent implements OnInit {
   }
 
   handleOrderFilteration() {
-    console.info(this.customer);
-    console.info(this.customerCtrl);
+    // console.info(this.customerId);
+    // console.info(this.customerCtrl);
+    console.info(this.custForm.getRawValue());
   }
 
 }

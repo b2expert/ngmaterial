@@ -1,6 +1,24 @@
 <mat-form-field>
-    <mat-select placeholder="Select Customer" [(ngModel)]="customer">
-        <mat-option>--Select--</mat-option>
-        <mat-option [value]="customer" *ngFor="let customer of customers$ | async">{{customer.custName}}</mat-option>
-    </mat-select>
+    <ng-container [ngSwitch]="type">
+
+        <ng-container *ngSwitchCase="'SELECT'">
+            <mat-select placeholder="Select Customer" [(ngModel)]="custName" [disabled]="disabled">
+                <mat-option>--Select--</mat-option>
+                <mat-option [value]="customer.custName" *ngFor="let customer of customers$ | async">
+                    {{customer.custName}}
+                </mat-option>
+            </mat-select>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'AUTO_COMPLETE'">
+            <input matInput placeholder="Search customer and select" [(ngModel)]="custName" [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option>--Select--</mat-option>
+                <mat-option [value]="customer.custName" *ngFor="let customer of customers$ | async">
+                    {{customer.custName}}
+                </mat-option>
+            </mat-autocomplete>
+        </ng-container>
+
+    </ng-container>
 </mat-form-field>

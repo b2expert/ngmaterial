@@ -1,14 +1,16 @@
-<form (submit)="handleOrderFilteration()">
+<form (submit)="handleOrderFilteration()" [formGroup]="custForm">
 
     <div>
         <label for="">Component With Model</label>
-        <app-customer-select name="customer" [(ngModel)]="customer" required></app-customer-select>
+        <app-customer-select name="customer1" formControlName="cust1" required></app-customer-select>
     </div>
+
     <div>
-        <label for="">Component With Model</label>
-        <app-customer-select name="customer" [formControl]="customerCtrl"></app-customer-select>
+        <label for="">Autocomplete Component With Model</label>
+        <app-customer-select name="customer2" formControlName="cust2" type="AUTO_COMPLETE"></app-customer-select>
     </div>
-    <button mat-raised-button color="primary">
+
+    <button mat-raised-button color="primary" [disabled]="custForm.invalid">
         <mat-icon>search</mat-icon>
         Filter
     </button>
