@@ -5,6 +5,7 @@ export interface IProduct {
     model: string;
     price: number;
     qty: number;
+    image: string;
     specifications: { [key: string]: string };
     loadProducts(): Observable<IProduct[]>;
 }
@@ -16,22 +17,7 @@ export interface ICart {
     addToCart(product: IProduct): void;
 }
 
-export class Product implements IProduct {
-
-    constructor() {
-        this.name = '';
-        this.model = '';
-        this.price = +'';
-        this.qty = 0;
-        this.specifications = {};
-        
-    }
-
-    name: string;
-    model: string;
-    price: number;
-    qty: number;
-    specifications: { [key: string]: string; };
+export class Product implements Partial<IProduct> {
 
     loadProducts(): Observable<IProduct[]> {
         throw new Error("Method not implemented.");

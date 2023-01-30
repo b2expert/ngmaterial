@@ -1,0 +1,25 @@
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .flex-item {
+        flex-grow: 1;
+        border: 1px solid #eee;
+        border-radius: 4px;
+        width: 300px;
+        margin: 10px;
+        padding: 10px;
+        text-align: center;
+
+        img {
+            width: 100%;
+        }
+
+        &:hover,&:focus {
+            box-shadow: 1px 0px 10px 5px #ccc;
+            border: none;
+            transform: scale(1.2, 100%);
+        }
+    }
+}

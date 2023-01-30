@@ -3,7 +3,7 @@ import { map, Observable } from "rxjs";
 import { AppHttpService } from "src/app/services";
 import { IProduct, Product } from "./product.model";
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class ProductService extends Product {
     
     constructor(private _httpContext: AppHttpService) {

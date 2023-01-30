@@ -1,0 +1,9 @@
+<div class="flex-container">
+    <mat-form-field>
+        <input matInput type="date" [formControl]="dobControl" />
+        <mat-hint class="error" *ngIf="showError">
+            <span *ngIf="ngControl.errors?.['required']">Field can not be left blank!</span>
+            <span *ngIf="ngControl.errors?.['invalidDOB']">{{ngControl.errors?.['invalidDOB']['message']}}</span>
+        </mat-hint>
+    </mat-form-field>
+</div>

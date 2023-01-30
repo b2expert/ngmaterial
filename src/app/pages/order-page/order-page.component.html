@@ -1,5 +1,18 @@
-<h2>Customer Orders</h2>
-<hr>
+<h2>Reusable Components</h2>
+<!-- <hr>
 <app-order-filter></app-order-filter>
 <hr>
-<app-order-list></app-order-list>
+
+<form [formGroup]="testForm">
+    <app-name-control formGroupName="name"></app-name-control>
+</form>
+<hr> -->
+<h4>Focus elements using arrow keys</h4>
+<div class="flex-container">
+    <div arrow-el class="flex-item" (click)="handleProductClick(p)"
+        *ngFor="let p of products$ | async; let rowIndex = index">
+        <img src="{{p.image}}" alt="" srcset="">
+        <p>{{p.name}}</p>
+        <p>({{p.model}})</p>
+    </div>
+</div>

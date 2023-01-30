@@ -8,7 +8,7 @@
             <mat-card-content>
                 <div class="row">
                     <mat-form-field>
-                        <input matInput name="firstName" #firstNameRef="ngModel"
+                        <input matInput preventSpace name="firstName" #firstNameRef="ngModel"
                             [(ngModel)]="inputModel.names.firstName" minlength="3" maxlength="30"
                             placeholder="Enter first name..." required>
                         <mat-icon matSuffix color="primary" *ngIf="firstNameRef.touched && firstNameRef.invalid"
@@ -73,20 +73,21 @@
                             <span *ngIf="mobileNoRef.errors?.['pattern']">Invalid mobile number!</span>
                         </mat-hint>
                     </mat-form-field>
+
                     <mat-form-field>
-                        <input matInput name="phoneNo" pattern="^[0-9]\d{2,4}-\d{8,8}$" #phoneNoRef="ngModel"
+                        <input matInput name="phoneNo" phoneValidator #phoneNoRef="ngModel"
                             [(ngModel)]="inputModel.contacts.phoneNo" placeholder="Enter land line no...">
 
                         <mat-icon matSuffix color="primary" *ngIf="phoneNoRef.touched && phoneNoRef.invalid"
-                            matTooltip="Phone number format must be like {STD code}-{8 digit positive number} (e.g : 033-23459876/ 080-34567654/ 022-85233654 etc.">
-                            info</mat-icon>
+                            [matTooltip]="phoneNoRef.errors?.['hints']">info</mat-icon>
                         <mat-icon matSuffix *ngIf="phoneNoRef.dirty && phoneNoRef.valid">done</mat-icon>
                         <mat-hint class="text-danger" *ngIf="phoneNoRef.touched && phoneNoRef.invalid">
-                            <span *ngIf="phoneNoRef.errors?.['pattern']">Invalid phone number!</span>
+                            <span *ngIf="phoneNoRef.errors?.['invalidPhone']">{{phoneNoRef.errors?.['message']}}</span>
                         </mat-hint>
                     </mat-form-field>
+
                     <mat-form-field>
-                        <input matInput pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" name="emailAddress" #emailRef="ngModel"
+                        <input matInput emailValidator name="emailAddress" #emailRef="ngModel"
                             [(ngModel)]="inputModel.contacts.email" placeholder="Enter valid email address..." required>
 
                         <mat-icon matSuffix color="primary" *ngIf="emailRef.touched && emailRef.invalid"
@@ -96,7 +97,7 @@
                         <mat-icon matSuffix *ngIf="emailRef.valid">done</mat-icon>
                         <mat-hint class="text-danger" *ngIf="emailRef.touched && emailRef.invalid">
                             <span *ngIf="emailRef.errors?.['required']">Email can not be left blank!</span>
-                            <span *ngIf="emailRef.errors?.['pattern']">Invalid email address!</span>
+                            <span *ngIf="emailRef.errors?.['invalidEmail']">{{emailRef.errors?.['message']}}</span>
                         </mat-hint>
                     </mat-form-field>
                 </div>

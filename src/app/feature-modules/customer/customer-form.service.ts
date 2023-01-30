@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { map } from "rxjs";
-import { AppForm, dobValidator, MessageValidator } from "../../models";
+import { AppForm, AppValidator } from "../../models";
 import { CustomerService } from "./customer.service";
 
 const REGEX_PATTERNS = {
@@ -45,7 +45,7 @@ export class CustomerFormService extends AppForm {
                 email: this._fb.control('', [Validators.required, Validators.pattern(REGEX_PATTERNS.email)]),
             }),
             others: this._fb.group({
-                dob: this._fb.control('', [Validators.required, dobValidator]),
+                dob: this._fb.control('', [Validators.required, AppValidator.dobValidator(1970, 19)]),
             })
         })
     }
@@ -80,7 +80,7 @@ export class CustomerFormService extends AppForm {
 
             // TODO: Load reference data if any
             this.formElements.forEach(element => {
-                if(element.dataRef && !element.dElement) {
+                if (element.dataRef && !element.dElement) {
                     this._assignControlOptions(element, '');
                 }
             });

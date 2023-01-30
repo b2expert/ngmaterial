@@ -13,6 +13,7 @@
             <mat-radio-button value="2">Reactive Form Group</mat-radio-button>
             <mat-radio-button value="3">Reactive Form Array</mat-radio-button>
             <mat-radio-button value="4">Reactive Dynamic</mat-radio-button>
+            <mat-radio-button value="5">Reusable Control</mat-radio-button>
           </mat-radio-group>
     </div>
 </div>
@@ -24,6 +25,15 @@
             <ng-container *ngSwitchCase="2"><app-reactive-simple></app-reactive-simple></ng-container>
             <ng-container *ngSwitchCase="3"><app-reactive-array></app-reactive-array></ng-container>
             <ng-container *ngSwitchCase="4"><app-reactive-dynamic></app-reactive-dynamic></ng-container>
+
+            <ng-container *ngSwitchCase="5">
+                <form [formGroup]="customerForm" (submit)="handleReusableControl()">
+                    <app-dob-control formControlName="dob1"></app-dob-control>
+                    <app-dob-control formControlName="dob2"></app-dob-control>
+                    <button mat-raised-button type="submit" [disabled]="customerForm.invalid">SUBMIT</button>
+                </form>
+            </ng-container>
+            
         </ng-container>
     </div>
 </div>

@@ -3,8 +3,9 @@
         <img [src]="authContext.user.profilePic" alt="">
         <label for="profilepicInput">
             <mat-icon>edit</mat-icon>
-            <input type="file" id="profilepicInput" (change)="onFileChange($event)" style="display: none;">
+            <input type="file" id="profilepicInput" #profilePicRef (change)="onFileChange($event)" style="display: none;">
         </label>
+        {{profilePicRef.files?.[0]?.['size'] | fileSize:3}}
     </div>
     <div></div>
 </div>

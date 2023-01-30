@@ -3,11 +3,18 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgMatModule } from './ng-mat.module';
 import { HttpClientModule } from '@angular/common/http';
-import { FilePathHandlerPipe } from './pipes';
-import { PreventSpaceDirective } from './directives/prevent-space.directive';
+import { FilePathHandlerPipe, FileSizeFormatterPipe } from './pipes';
+import { ArrowElDirective, EmailValidatorDirective, PhoneValidatorDirective, PreventSpaceDirective } from './directives';
 
 @NgModule({
-  declarations: [FilePathHandlerPipe, PreventSpaceDirective],
+  declarations: [
+    FilePathHandlerPipe,
+    FileSizeFormatterPipe,
+    PreventSpaceDirective,
+    EmailValidatorDirective,
+    PhoneValidatorDirective,
+    ArrowElDirective
+  ],
   exports: [
     CommonModule,
     FormsModule,
@@ -15,7 +22,11 @@ import { PreventSpaceDirective } from './directives/prevent-space.directive';
     NgMatModule,
     HttpClientModule,
     FilePathHandlerPipe,
-    PreventSpaceDirective
+    FileSizeFormatterPipe,
+    PreventSpaceDirective,
+    EmailValidatorDirective,
+    ArrowElDirective,
+    PhoneValidatorDirective
   ]
 })
 export class SharedModule { }
